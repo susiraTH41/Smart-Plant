@@ -1,7 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../model/login_model.dart';
 import '../api/api_login.dart' ;
-import 'home.dart';
+import 'menuAdmin.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -9,7 +10,7 @@ class LoginPage extends StatelessWidget {
     return MaterialApp(
       title: "Login",
       home: UIloginPage(),
-      theme: ThemeData(primaryColor: Colors.deepPurpleAccent),
+      theme: ThemeData(primaryColor: Colors.blue),
     );
   }
 }
@@ -22,7 +23,7 @@ class UIloginPage extends StatefulWidget {
 class _UIloginPageState extends State<UIloginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
+  
   @override
   @override
   Widget build(BuildContext context) {
@@ -35,11 +36,6 @@ class _UIloginPageState extends State<UIloginPage> {
           body: Container(
             child: Center(
               child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 1, color: Colors.deepPurpleAccent)
-                      ),
-                  margin: EdgeInsets.all(32),
-                  padding: EdgeInsets.all(24),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -48,7 +44,7 @@ class _UIloginPageState extends State<UIloginPage> {
                       buildTextFieldPassword(),
                       buildButtonSignIn()
                        
-                       
+
                     ],
                   )),
             )
@@ -60,10 +56,11 @@ class _UIloginPageState extends State<UIloginPage> {
     padding: EdgeInsets.all(12),
     decoration: BoxDecoration(
       border: Border.all( 
-        color: Colors.deepPurpleAccent,width: 2
+        color: Colors.blue,width: 2
       ), 
     ),
-    child: TextField( controller: emailController ,
+    child: TextField( 
+      controller: emailController ,
       decoration: InputDecoration.collapsed(
         hintText: "User ",
         hintStyle: TextStyle(color: Colors.black54,fontWeight: FontWeight.bold)
@@ -79,10 +76,11 @@ Container buildTextFieldPassword() {
     margin: EdgeInsets.only(top: 12),
    decoration: BoxDecoration(
      border: Border.all( 
-      color: Colors.deepPurpleAccent,width: 2
+      color: Colors.blue,width: 2
      ),  
     ),
-    child: TextField(   controller: passwordController ,
+    child: TextField(
+      controller: passwordController ,
       decoration: InputDecoration.collapsed(hintText: "Password ",hintStyle: TextStyle(color: Colors.black54,fontWeight: FontWeight.bold)),
       style: TextStyle(fontSize: 18,color: Colors.black),
       obscureText: true 
@@ -100,7 +98,7 @@ Container buildTextFieldPassword() {
               style: TextStyle(fontSize: 18, color: Colors.white)),
           decoration: BoxDecoration(
              gradient: LinearGradient(
-          colors: [Colors.deepPurpleAccent,Colors.deepPurpleAccent[400],Colors.deepPurpleAccent[700]]
+          colors: [Colors.blue,Colors.blue[400],Colors.blue[700]]
         ),
               borderRadius: BorderRadius.circular(16), color: Colors.green[200]),
           margin: EdgeInsets.only(top: 16),
@@ -111,11 +109,55 @@ Container buildTextFieldPassword() {
     );
   }
 
-  void signIn() async{
+  signIn() async{
     try{
       UserModel user = await loginUser(emailController.text.trim(),passwordController.text.trim()).timeout(const Duration(seconds: 5));
       //print(user);
+      //List<PollutionsModel> pollutin = await pollutions();
       bool success = user.success ;
+      //print(pollutin[0].pm1);
+      //print(success);
+      if(success == true){
+        //  Navigator.pushReplacement(
+         //   context, MaterialPageRoute(builder: (context) => MenuAdmin(user)));
+      }else if(success == false){
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => CupertinoAlertDialog(
+            content: Text('test'),
+          //  content: Text('${user.msg}'),
+          ),
+        );
+        print("login error");
+      }else{
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => CupertinoAlertDialog(
+            content: Text('test'),
+           // content: Text('${user.msg}'),
+          ),
+        );
+        print("connect error1");
+      }
+    }catch (e){
+       showDialog(
+          context: context,
+          builder: (BuildContext context) => CupertinoAlertDialog(
+            title: Text('invalid'),
+            content: Text('Connect Error !'),
+          ),
+        );
+      print("connect error2");
+    }
+  }
+  
+
+
+   /*void signIn() async{
+    try{
+      UserModel user = await loginUser(emailController.text.trim(),passwordController.text.trim()).timeout(const Duration(seconds: 5));
+      print(user.userinfo.email);
+      bool success = true ;
       //print(success);
       if(success == true){
           Navigator.pushReplacement(
@@ -128,5 +170,5 @@ Container buildTextFieldPassword() {
     }catch (e){
       print("connect error2");
     }
-  }
+  }*/
 }

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mqtt_client/mqtt_client.dart';
 import 'api/api_control.dart';
 import 'model/control_model.dart';
+import 'mqtt/mqttManager.dart';
+MqttClient client;
+
 //////////////////////////////////////////// select room
 class MyStatefulWidget extends StatefulWidget {
   MyStatefulWidget({Key key}) : super(key: key);
@@ -45,84 +49,110 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
 /////////////////////////    Toggle Buttons control Door
 class BoxxDoor extends StatefulWidget {
+
+
   @override
   _BoxxDoorState createState() => _BoxxDoorState();
 }
 
 class _BoxxDoorState extends State<BoxxDoor> {
+  //String topic ;
+  MQTTManager _manager = MQTTManager();
+  
   @override
   List<bool> selections;
   Color selectColor = Colors.greenAccent ;
+  //final myStream = NumberCreator().stream;
   @override
   void initState() {
     selections = [true, false];
+    
     super.initState();
+
+    
   }
 
   Widget build(BuildContext context) {
-    //List<bool> _selections = List.generate(3, (index) => false);
-    return Padding(
-      padding: const EdgeInsets.only(left: 30 ,right: 30, bottom:  10, top: 5),
-      child: Container(alignment: Alignment.centerRight,
-        padding: const EdgeInsets.all(30.0),
-        decoration:
-            BoxDecoration(color: Colors.white, border: Border.all(color: Colors.deepPurpleAccent)),
-        height: 100,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text( "DOOR",
-                style: TextStyle(fontSize: 25) ),
-            SizedBox(
-              width: 80,
-            ),
-            Expanded(
-              child: ToggleButtons(
-                borderColor: Colors.deepPurpleAccent,
-                fillColor: selectColor,
-                selectedBorderColor: Colors.deepPurpleAccent,
-                selectedColor: Colors.white,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'open',
-                      style: TextStyle(fontSize: 16),
-                    ),
+    _configureAndConnect();
+    //_manager?.onSubscribed('8zZacMGJWd/color');
+    var expanded = Expanded(
+                  child: ToggleButtons(
+                    borderColor: Colors.deepPurpleAccent,
+                    fillColor: selectColor,
+                    selectedBorderColor: Colors.deepPurpleAccent,
+                    selectedColor: Colors.white,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'open',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'close',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ],
+                    onPressed: (int index) {
+                      setState(() {
+                       
+                        for (int i = 0; i < selections.length; i++) {
+                          selections[i] = i == index;
+                          
+                        }//_manager?.onSubscribed('8zZacMGJWd/color');
+
+                        if(index==1){
+                          selectColor = Colors.redAccent ;
+                         // _manager.publishColor('red', 1, '8zZacMGJWd/color', true);
+                          
+                          control("ON","1515");
+                         
+                        }
+                        else{
+                          selectColor = Colors.greenAccent ;
+                          //_manager.publishColor('green', 1, '8zZacMGJWd/color', true);
+                          control("OFF","1515");
+                        }
+                      });
+                    },
+                    isSelected: selections,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'close',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
-                ],
-                onPressed: (int index) {
-                  setState(() {
-                    for (int i = 0; i < selections.length; i++) {
-                      selections[i] = i == index;
-                      
-                    }
-                    if(index==1){
-                      selectColor = Colors.redAccent ;
-                      control("ON","1515");
-                    }
-                    else{
-                      selectColor = Colors.greenAccent ;
-                      control("OFF","1515");
-                    }
-                  });
-                },
-                isSelected: selections,
-              ),
-            ),
+                );
+        return Padding(
+          padding: const EdgeInsets.only(left: 30 ,right: 30, bottom:  10, top: 5),
+          child: Container(alignment: Alignment.centerRight,
+            padding: const EdgeInsets.all(30.0),
+            decoration:
+                BoxDecoration(color: Colors.white, border: Border.all(color: Colors.deepPurpleAccent)),
+            height: 100,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text( "DOOR",
+                    style: TextStyle(fontSize: 25) ),
+                SizedBox(
+                  width: 80,
+                ),
+                expanded,
           ],
         ),
       ),
     );
   }
+  void _configureAndConnect() {
+      print("2");
+      _manager.initializeMQTTClient();  
+      print("3");
+        _manager.connect1();
+    
+  }
+
+  
 }
 
 

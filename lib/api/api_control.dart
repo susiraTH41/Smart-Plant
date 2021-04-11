@@ -4,7 +4,7 @@ import '../model/control_model.dart';
 
   Future<ControlModel> control(String action,String deviceId) async{
     try{
-        final String apiUrl = "http://10.64.135.77:3000/mobile/api/control/${deviceId}";
+        final String apiUrl = "http://158.108.97.158:3000/mobile/api/control/${deviceId}";
         final response = await http.post(apiUrl, body: {
         "action": action
       }).timeout(const Duration(seconds: 5));

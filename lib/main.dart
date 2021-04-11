@@ -1,12 +1,12 @@
-/*import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'screen/login.dart';
 void main() async{
   runApp(LoginPage());
 }
 
-*/
 
 
+/*
 import 'package:flutter/material.dart';
 import 'package:login_fontend/screen/home.dart';
 import 'screen/menuAdmin.dart';
@@ -26,3 +26,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+*/

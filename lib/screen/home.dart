@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_fontend/api/api_control.dart';
-import 'package:login_fontend/screen/pages/tamplate/buttom_item.dart';
+import 'package:login_fontend/screen/tamplate/buttom_item.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import '../Tamplate.dart';
 import '../mqtt/mqtt.dart';
@@ -12,13 +12,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 //  MqttClient client;
-  var topic = '8zZacMGJWd/color';
+ /* var topic = '8zZacMGJWd/color';
   dynamic selections = [true, false];
   void _publish(String message) {
     final builder = MqttClientPayloadBuilder();
     builder.addString(message);
     client?.publishMessage(topic, MqttQos.atLeastOnce, builder.payload);
-  }
+  }*/
 
 
   @override

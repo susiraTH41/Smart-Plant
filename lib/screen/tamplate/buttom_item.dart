@@ -6,8 +6,8 @@ import 'package:mqtt_client/mqtt_client.dart';
 
 
 class SwitchControl extends StatefulWidget {  
-  String topic ;
-  String deviceID ="23622";
+  //String topic ;
+  //String deviceID ="23624";
   //SwitchControl({this.topic,this.deviceID});
   @override  
   SwitchClass createState() => new SwitchClass();  
@@ -17,15 +17,14 @@ class SwitchClass extends State {
   MqttClient client;
   //MQTTManager _manager = MQTTManager();
   var topic = '8zZacMGJWd/color';
-  String deviceID ;
   //SwitchClass({this.topic,this.deviceID});
   bool isSwitched = false;  
   var textValue = 'Switch is OFF';  
- /* void _publish(String message) {
+  void _publish(String message) {
     final builder = MqttClientPayloadBuilder();
     builder.addString(message);
     client?.publishMessage(topic, MqttQos.atLeastOnce, builder.payload);
-  }*/
+  }
   
   
   void toggleSwitch(bool value) {  
@@ -35,7 +34,7 @@ class SwitchClass extends State {
       setState(() {  
         isSwitched = true;  
         //control("ON",deviceID);
-        //this._publish('green');
+        this._publish('green');
         textValue = 'Switch Button is ON'; 
       });  
       //print('Switch Button is ON');  
@@ -45,10 +44,9 @@ class SwitchClass extends State {
       setState(() {  
         isSwitched = false;  
         //control("OFF",deviceID);
-        //this._publish('red');
+        this._publish('red');
         textValue = 'Switch Button is OFF';  
       });  
-      //print('Switch Button is OFF');  
     }  
   }  
   @override  
@@ -58,8 +56,9 @@ class SwitchClass extends State {
 //    _manager.subScribeTo(topic);
     connect().then((value) {
                   this.client = value;
-                  print('cecwcwec  ${client.subscribe(topic, MqttQos.atLeastOnce)}');
-                 // subScribeTo(topic,client); 
+                  //print('cecwcwec  ${client.subscribe(topic, MqttQos.atLeastOnce)}');
+                  client.subscribe(topic, MqttQos.atLeastOnce);
+                  subScribeTo(topic,client); 
                 });
     
     return Column(
@@ -83,20 +82,14 @@ class SwitchClass extends State {
     client.updates.listen((List<MqttReceivedMessage<MqttMessage>> c) {
       final MqttPublishMessage recMess = c[0].payload;
       String pt = MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
-      print('acsaca$pt');
+      //print('acsaca$pt');
   
       if(pt =="green" && !isSwitched){
           toggleSwitch(false);
-         
-          //i=10;
-        
+
       }else if(pt =="red" && isSwitched ){
          toggleSwitch(false);
-         
-         //i=10;
         }
-        
-      
 
     });
   }

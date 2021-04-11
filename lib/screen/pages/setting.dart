@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:login_fontend/model/login_model.dart';
-import 'package:login_fontend/screen/pages/tamplate/menu_item.dart';
 
 
 class Setting extends StatelessWidget {

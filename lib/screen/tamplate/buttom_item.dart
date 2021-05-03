@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_fontend/api/api_control.dart';
+import 'package:login_fontend/api/devices/api_control.dart';
 import 'package:login_fontend/mqtt/mqtt.dart';
-import 'package:login_fontend/mqtt/mqttManager.dart';
 import 'package:mqtt_client/mqtt_client.dart';  
 
 

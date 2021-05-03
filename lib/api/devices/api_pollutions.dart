@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import '../model/pollutions_model.dart';
+import '../../model/devices/pollutions_model.dart';
 
 Future <List<PollutionsModel>> pollutions() async {
   try {

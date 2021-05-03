@@ -18,7 +18,7 @@ class MenuAdmin extends StatefulWidget {
 
 class _MenuAdminState extends State<MenuAdmin> {
   UserModel user;
-  //MenuAdminState(this.user);
+  //_MenuAdminState(this.user);
   int _selectedIndex = 2;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);

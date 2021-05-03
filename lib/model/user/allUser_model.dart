@@ -1,34 +1,30 @@
 // To parse this JSON data, do
 //
-//     final userModel = userModelFromJson(jsonString);
+//     final allUserModel = allUserModelFromJson(jsonString);
 
 import 'dart:convert';
 
-UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
+AllUserModel allUserModelFromJson(String str) => AllUserModel.fromJson(json.decode(str));
 
-String userModelToJson(UserModel data) => json.encode(data.toJson());
+String allUserModelToJson(AllUserModel data) => json.encode(data.toJson());
 
-class UserModel {
-    UserModel({
-        this.success,
+class AllUserModel {
+    AllUserModel({
+        this.sccess,
         this.userinfo,
-        this.msg,
     });
 
-    bool success;
-    Userinfo userinfo;
-    String msg;
+    bool sccess;
+    List<Userinfo> userinfo;
 
-    factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        success: json["success"] == null ? null : json["success"],
-        userinfo: json["userinfo"] == null ? null : Userinfo.fromJson(json["userinfo"]),
-        msg: json["msg"] == null ? null : json["msg"],
+    factory AllUserModel.fromJson(Map<String, dynamic> json) => AllUserModel(
+        sccess: json["sccess"] == null ? null : json["sccess"],
+        userinfo: json["userinfo"] == null ? null : List<Userinfo>.from(json["userinfo"].map((x) => Userinfo.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
-        "success": success == null ? null : success,
-        "userinfo": userinfo == null ? null : userinfo.toJson(),
-        "msg": msg == null ? null : msg,
+        "sccess": sccess == null ? null : sccess,
+        "userinfo": userinfo == null ? null : List<dynamic>.from(userinfo.map((x) => x.toJson())),
     };
 }
 

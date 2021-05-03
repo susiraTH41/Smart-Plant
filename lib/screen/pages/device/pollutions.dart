@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_fontend/api/api_pollutions.dart';
-import 'package:login_fontend/model/pollutions_model.dart';
+import 'package:login_fontend/api/devices/api_pollutions.dart';
+import 'package:login_fontend/model/devices/pollutions_model.dart';
 import 'package:login_fontend/screen/tamplate/menu_item.dart';
 
 

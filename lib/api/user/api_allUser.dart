@@ -1,17 +1,17 @@
 import 'package:http/http.dart' as http;
-import '../model/control_model.dart';
+import '../model/user/allUser_model.dart';
 
 
-  Future<ControlModel> control(String action,String deviceId) async{
+  Future<AllUserModel> allUser(String userid ) async{
     try{
-        final String apiUrl = "http://158.108.97.158:3000/mobile/api/control/${deviceId}";
+        final String apiUrl = "http://158.108.97.158:3000/api/mobile/admin/alluser?" ;
         final response = await http.post(apiUrl, body: {
-        "action": action
+        "myUserId ":  userid ,
       }).timeout(const Duration(seconds: 5));
       if(response.statusCode == 200){
         //print("feaf");
         final String responseString = response.body;
-        return controlModelFromJson(responseString);
+        return allUserModelFromJson(responseString);
       }else{
         //print("fas");
         return null;

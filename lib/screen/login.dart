@@ -118,14 +118,14 @@ Container buildTextFieldPassword() {
       //print(pollutin[0].pm1);
       //print(success);
       if(success == true){
-        //  Navigator.pushReplacement(
-         //   context, MaterialPageRoute(builder: (context) => MenuAdmin(user)));
+      //    Navigator.pushReplacement(
+      //     context, MaterialPageRoute(builder: (context) => MenuAdmin(user)));
       }else if(success == false){
         showDialog(
           context: context,
           builder: (BuildContext context) => CupertinoAlertDialog(
-            content: Text('test'),
-          //  content: Text('${user.msg}'),
+            //content: Text('test'),
+            content: Text('${user.msg}'),
           ),
         );
         print("login error");
@@ -133,8 +133,8 @@ Container buildTextFieldPassword() {
         showDialog(
           context: context,
           builder: (BuildContext context) => CupertinoAlertDialog(
-            content: Text('test'),
-           // content: Text('${user.msg}'),
+            //content: Text('test'),
+            content: Text('${user.msg}'),
           ),
         );
         print("connect error1");

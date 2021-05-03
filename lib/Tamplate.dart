@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mqtt_client/mqtt_client.dart';
-import 'api/api_control.dart';
-import 'model/control_model.dart';
-import 'mqtt/mqttManager.dart';
-MqttClient client;
+import 'api/devices/api_control.dart';
+import 'model/devices/control_model.dart';
+
 
 //////////////////////////////////////////// select room
 class MyStatefulWidget extends StatefulWidget {
@@ -57,7 +56,6 @@ class BoxxDoor extends StatefulWidget {
 
 class _BoxxDoorState extends State<BoxxDoor> {
   //String topic ;
-  MQTTManager _manager = MQTTManager();
   
   @override
   List<bool> selections;
@@ -73,8 +71,7 @@ class _BoxxDoorState extends State<BoxxDoor> {
   }
 
   Widget build(BuildContext context) {
-    _configureAndConnect();
-    //_manager?.onSubscribed('8zZacMGJWd/color');
+
     var expanded = Expanded(
                   child: ToggleButtons(
                     borderColor: Colors.deepPurpleAccent,
@@ -144,14 +141,6 @@ class _BoxxDoorState extends State<BoxxDoor> {
       ),
     );
   }
-  void _configureAndConnect() {
-      print("2");
-      _manager.initializeMQTTClient();  
-      print("3");
-        _manager.connect1();
-    
-  }
-
   
 }
 

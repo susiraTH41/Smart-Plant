@@ -3,11 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:login_fontend/model/login_model.dart';
 import 'package:login_fontend/provider/provider_user.dart';
-import 'package:login_fontend/screen/pages/management/adduser.dart';
-import 'package:login_fontend/screen/pages/management/editUser.dart';
+import 'package:login_fontend/screen/pages/management/user/adduser.dart';
+import 'package:login_fontend/screen/pages/management/user/editUser.dart';
 
 class AllUser extends StatelessWidget {
- 
   final String title;
   UserModel user;
   AllUser({this.title, this.user});
@@ -31,12 +30,9 @@ class _AllUser extends StatefulWidget {
 }
 
 class _AllUserState extends State<_AllUser> with AutomaticKeepAliveClientMixin {
-  
-   
-  
   @override
   bool get wantKeepAlive => false;
- 
+
   @override
   void initState() {
     super.initState();

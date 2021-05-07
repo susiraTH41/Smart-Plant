@@ -10,20 +10,20 @@ String allUserModelToJson(AllUserModel data) => json.encode(data.toJson());
 
 class AllUserModel {
     AllUserModel({
-        this.sccess,
+        this.success,
         this.alluser,
     });
 
-    bool sccess;
+    bool success;
     List<Alluser> alluser;
 
     factory AllUserModel.fromJson(Map<String, dynamic> json) => AllUserModel(
-        sccess: json["sccess"] == null ? null : json["sccess"],
+        success: json["success"] == null ? null : json["success"],
         alluser: json["alluser"] == null ? null : List<Alluser>.from(json["alluser"].map((x) => Alluser.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
-        "sccess": sccess == null ? null : sccess,
+        "success": success == null ? null : success,
         "alluser": alluser == null ? null : List<dynamic>.from(alluser.map((x) => x.toJson())),
     };
 }
@@ -87,3 +87,5 @@ class Alluser {
         "updatedAt": updatedAt == null ? null : updatedAt.toIso8601String(),
     };
 }
+
+

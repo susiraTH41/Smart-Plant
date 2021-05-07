@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:login_fontend/model/login_model.dart';
+import 'package:login_fontend/model/devices/allDevices_model.dart';
 import 'package:login_fontend/provider/provider_devices.dart';
-import 'package:login_fontend/screen/pages/management/adduser.dart';
-import 'package:login_fontend/screen/pages/management/editUser.dart';
+import 'package:login_fontend/screen/pages/management/devices/adddevicesLora.dart';
+import 'package:login_fontend/screen/pages/management/devices/adddevicesMqtt.dart';
+import 'package:login_fontend/screen/pages/management/devices/editdevices.dart';
 
 class AllDevices extends StatelessWidget {
   final String title;
@@ -47,25 +50,20 @@ class _AllDevicesState extends State<_AllDevices>
       body: Consumer(
         builder: (context, DevicesProvider alldevices, Widget child) {
           return ListView.builder(
-              itemCount: alldevices.email.length,
+              itemCount: alldevices.place.length,
               itemBuilder: (BuildContext content, int index) {
                 return Container(
                   color: Colors.white,
                   child: ListTile(
-                    title: Text('${alldevices.email[index]}',
+                    title: Text('${alldevices.place[index]}',
                         style: TextStyle(fontSize: 24.0)),
                     trailing: Icon(Icons.chevron_right),
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => EditUser(
-                                widget.user,
-                                alldevices.userId[index],
-                                alldevices.email[index],
-                                alldevices.first_name[index],
-                                alldevices.last_name[index],
-                                alldevices.rank[index])),
+                            builder: (context) => EditDevices(widget.user,
+                                alldevices.id[index], alldevices.place[index])),
                       );
                     },
                   ),
@@ -73,16 +71,33 @@ class _AllDevicesState extends State<_AllDevices>
               });
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AddUser(widget.user)),
-          );
-        },
-        child: const Icon(Icons.add),
-        backgroundColor: Colors.blue,
-      ),
+      floatingActionButton: SpeedDial(
+          animatedIcon: AnimatedIcons.close_menu,
+          backgroundColor: Colors.lightBlue,
+          children: [
+            SpeedDialChild(
+                child: Icon(Icons.add),
+                backgroundColor: Colors.lightBlue,
+                label: "LoRa Devices",
+                onTap: () {
+                  return Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AddDevicesLora(widget.user)),
+                  );
+                }),
+            SpeedDialChild(
+                child: Icon(Icons.add),
+                backgroundColor: Colors.lightBlue,
+                label: "MQTT Devices",
+                onTap: () {
+                  return Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AddDevicesMqtt(widget.user)),
+                  );
+                }),
+          ]),
     );
   }
 }

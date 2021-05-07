@@ -10,20 +10,20 @@ String changePasswordrModelToJson(ChangePasswordrModel data) => json.encode(data
 
 class ChangePasswordrModel {
     ChangePasswordrModel({
-        this.sccess,
+        this.success,
         this.msg,
     });
 
-    bool sccess;
+    bool success;
     String msg;
 
     factory ChangePasswordrModel.fromJson(Map<String, dynamic> json) => ChangePasswordrModel(
-        sccess: json["sccess"] == null ? null : json["sccess"],
+        success: json["success"] == null ? null : json["success"],
         msg: json["msg"] == null ? null : json["msg"],
     );
 
     Map<String, dynamic> toJson() => {
-        "sccess": sccess == null ? null : sccess,
+        "success": success == null ? null : success,
         "msg": msg == null ? null : msg,
     };
 }

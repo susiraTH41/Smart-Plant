@@ -1,42 +1,40 @@
 import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 
-import 'package:login_fontend/model/user/allUser_model.dart';
-import 'package:login_fontend/api/user/api_allUser.dart';
+import 'package:login_fontend/model/devices/allDevices_model.dart';
+import 'package:login_fontend/api/devices/api_allDevices.dart';
 
 class DevicesProvider with ChangeNotifier {
-  AllUserModel alldevices = AllUserModel();
+  AllDevicesModel alldevices = AllDevicesModel();
   bool loading = false;
-  List<int> userId = [];
-  List<String> email = [];
-  List<String> first_name = [];
-  List<String> last_name = [];
-  List<String> rank = [];
+  List<int> id = [];
+  List<String> deviceID = [];
+  List<String> place = [];
 
   @override
   void getPostDevices(String myUserId) async {
     loading = true;
-    alldevices = await allUser(myUserId);
+    alldevices = await allDevices(myUserId);
     loading = false;
-    print('ddqwdqwdqwdqwd${alldevices.alluser.length}');
-    print(email);
-    print(first_name);
-    print(last_name);
-    print(rank);
+    print('ddqwdqwdqwdqwd${alldevices.data.length}');
+    print(deviceID);
+    print(place);
     await addInfoOfDevices();
     //notifyListeners();
   }
 
   Future addInfoOfDevices() async {
     try {
-      bool success = alldevices.sccess;
-      if (success == true && alldevices.alluser.length != email.length) {
-        for (int i = 0; i < alldevices.alluser.length; i++) {
-          this.userId.add(alldevices.alluser[i].id);
-          this.email.add(alldevices.alluser[i].email);
-          this.first_name.add(alldevices.alluser[i].firstName);
-          this.last_name.add(alldevices.alluser[i].lastName);
-          this.rank.add(alldevices.alluser[i].rank.toUpperCase());
+      List<int> id = [];
+      this.deviceID = [];
+      this.place = [];
+
+      bool success = alldevices.success;
+      if (success == true && alldevices.data.length != id.length) {
+        for (int i = 0; i < alldevices.data.length; i++) {
+          this.id.add(alldevices.data[i].id);
+          this.deviceID.add(alldevices.data[i].deviceId);
+          this.place.add(alldevices.data[i].place);
         }
       }
     } catch (e) {

@@ -10,20 +10,20 @@ String addUserModelToJson(AddUserModel data) => json.encode(data.toJson());
 
 class AddUserModel {
     AddUserModel({
-        this.sccess,
+        this.success,
         this.msg,
     });
 
-    bool sccess;
+    bool success;
     String msg;
 
     factory AddUserModel.fromJson(Map<String, dynamic> json) => AddUserModel(
-        sccess: json["sccess"] == null ? null : json["sccess"],
+        success: json["success"] == null ? null : json["success"],
         msg: json["msg"] == null ? null : json["msg"],
     );
 
     Map<String, dynamic> toJson() => {
-        "sccess": sccess == null ? null : sccess,
+        "success": success == null ? null : success,
         "msg": msg == null ? null : msg,
     };
 }

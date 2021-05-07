@@ -39,7 +39,23 @@ class _EditUserState extends State<EditUser> {
   EditUserModel editsubmit;
   UpdateUserModel updatesubmit;
   Widget build(BuildContext context) {
-    if (this.dropdownValue != "SUSPEND") {
+    if (this.email == "beer@hotmail.com") {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Edit User'),
+        ),
+        body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Center(
+                child: ListView(children: [
+              buildTextField("E-mail", email, email_controll),
+              buildTextField("Firstname", first_name, first_name_controll),
+              buildTextField("Lastname", last_name, last_name_controll),
+              buildButtonSignIn()
+            ]))),
+      );
+    }
+    if (this.dropdownValue != "SUSPEND" && this.email != "beer@hotmail.com") {
       return Scaffold(
         appBar: AppBar(
           title: Text('Edit User'),
@@ -148,7 +164,7 @@ class _EditUserState extends State<EditUser> {
         if (this.last_name_controll.text.trim() == "") {
           this.last_name_controll = TextEditingController(text: this.last_name);
         }
-        if (dropdownValue != "SUSPEND") {
+        if (dropdownValue != "SUSPEND" || this.email == "beer@hotmail.com") {
           editsubmit = await editUser(
             this.user.userinfo.id.toString(),
             this.userId.toString(),

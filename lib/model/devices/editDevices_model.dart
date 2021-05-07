@@ -1,15 +1,15 @@
 // To parse this JSON data, do
 //
-//     final updateUserModel = updateUserModelFromJson(jsonString);
+//     final editDevicesModel = editDevicesModelFromJson(jsonString);
 
 import 'dart:convert';
 
-UpdateUserModel updateUserModelFromJson(String str) => UpdateUserModel.fromJson(json.decode(str));
+EditDevicesModel editDevicesModelFromJson(String str) => EditDevicesModel.fromJson(json.decode(str));
 
-String updateUserModelToJson(UpdateUserModel data) => json.encode(data.toJson());
+String editDevicesModelToJson(EditDevicesModel data) => json.encode(data.toJson());
 
-class UpdateUserModel {
-    UpdateUserModel({
+class EditDevicesModel {
+    EditDevicesModel({
         this.success,
         this.msg,
     });
@@ -17,7 +17,7 @@ class UpdateUserModel {
     bool success;
     String msg;
 
-    factory UpdateUserModel.fromJson(Map<String, dynamic> json) => UpdateUserModel(
+    factory EditDevicesModel.fromJson(Map<String, dynamic> json) => EditDevicesModel(
         success: json["success"] == null ? null : json["success"],
         msg: json["msg"] == null ? null : json["msg"],
     );

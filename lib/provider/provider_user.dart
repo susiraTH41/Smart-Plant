@@ -18,19 +18,20 @@ class UserProvider with ChangeNotifier {
     loading = true;
     alluser = await allUser(myUserId);
     loading = false;
-    print('ddqwdqwdqwdqwd${alluser.alluser.length}');
-    print(email);
-    print(first_name);
-    print(last_name);
-    print(rank);
     await addInfoOfUser();
     //notifyListeners();
   }
 
   Future addInfoOfUser() async {
     try {
-      bool success = alluser.sccess;
-      if (success == true && alluser.alluser.length != email.length) {
+      bool loading = false;
+      List<int> userId = [];
+      List<String> email = [];
+      List<String> first_name = [];
+      List<String> last_name = [];
+      List<String> rank = [];
+      bool success = alluser.success;
+      if (success == true && alluser.alluser.length != this.email.length) {
         for (int i = 0; i < alluser.alluser.length; i++) {
           this.userId.add(alluser.alluser[i].id);
           this.email.add(alluser.alluser[i].email);

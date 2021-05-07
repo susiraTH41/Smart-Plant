@@ -75,7 +75,7 @@ class Devices extends StatelessWidget {
         ),
       ),
     )
-    )
+
 
 
           );

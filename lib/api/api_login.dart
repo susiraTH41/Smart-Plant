@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import '../model/login_model.dart';
+import 'package:login_fontend/model/login_model.dart';
 
 Future<UserModel> loginUser(
     String emailController, String passwordController) async {

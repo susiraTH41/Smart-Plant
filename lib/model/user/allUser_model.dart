@@ -11,25 +11,25 @@ String allUserModelToJson(AllUserModel data) => json.encode(data.toJson());
 class AllUserModel {
     AllUserModel({
         this.sccess,
-        this.userinfo,
+        this.alluser,
     });
 
     bool sccess;
-    List<Userinfo> userinfo;
+    List<Alluser> alluser;
 
     factory AllUserModel.fromJson(Map<String, dynamic> json) => AllUserModel(
         sccess: json["sccess"] == null ? null : json["sccess"],
-        userinfo: json["userinfo"] == null ? null : List<Userinfo>.from(json["userinfo"].map((x) => Userinfo.fromJson(x))),
+        alluser: json["alluser"] == null ? null : List<Alluser>.from(json["alluser"].map((x) => Alluser.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
         "sccess": sccess == null ? null : sccess,
-        "userinfo": userinfo == null ? null : List<dynamic>.from(userinfo.map((x) => x.toJson())),
+        "alluser": alluser == null ? null : List<dynamic>.from(alluser.map((x) => x.toJson())),
     };
 }
 
-class Userinfo {
-    Userinfo({
+class Alluser {
+    Alluser({
         this.id,
         this.prefix,
         this.rank,
@@ -57,7 +57,7 @@ class Userinfo {
     DateTime createdAt;
     DateTime updatedAt;
 
-    factory Userinfo.fromJson(Map<String, dynamic> json) => Userinfo(
+    factory Alluser.fromJson(Map<String, dynamic> json) => Alluser(
         id: json["id"] == null ? null : json["id"],
         prefix: json["prefix"] == null ? null : json["prefix"],
         rank: json["rank"] == null ? null : json["rank"],

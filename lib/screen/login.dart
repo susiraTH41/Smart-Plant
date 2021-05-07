@@ -8,6 +8,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "Login",
       home: UIloginPage(),
       theme: ThemeData(primaryColor: Colors.blue),
@@ -118,8 +119,8 @@ Container buildTextFieldPassword() {
       //print(pollutin[0].pm1);
       //print(success);
       if(success == true){
-      //    Navigator.pushReplacement(
-      //     context, MaterialPageRoute(builder: (context) => MenuAdmin(user)));
+          Navigator.pushReplacement(
+           context, MaterialPageRoute(builder: (context) => MenuAdmin(user)));
       }else if(success == false){
         showDialog(
           context: context,

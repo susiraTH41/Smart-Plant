@@ -3,22 +3,21 @@ import 'package:login_fontend/model/login_model.dart';
 import 'package:login_fontend/screen/pages/log.dart';
 import 'package:login_fontend/screen/pages/management.dart';
 import 'package:login_fontend/screen/pages/setting.dart';
-import 'home.dart';
-import 'pages/homepage.dart';
-import 'pages/devices.dart';
+import 'package:login_fontend/screen/pages/homepage.dart';
+import 'package:login_fontend/screen/pages/devices.dart';
 
 
 class MenuAdmin extends StatefulWidget {
  
-  //UserModel user;
- // MenuAdmin(this.user);
+  UserModel user;
+  MenuAdmin(this.user);
   @override
-  State<StatefulWidget> createState() => _MenuAdminState();
+  State<StatefulWidget> createState() => _MenuAdminState(this.user);
 }
 
 class _MenuAdminState extends State<MenuAdmin> {
   UserModel user;
-  //_MenuAdminState(this.user);
+  _MenuAdminState(this.user);
   int _selectedIndex = 2;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -41,9 +40,6 @@ class _MenuAdminState extends State<MenuAdmin> {
   Widget build(BuildContext context) {
     final List<Widget> pageWidget = _pageWidget();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Smart Plans '),
-      ),
       body: Center(
         child: pageWidget .elementAt(_selectedIndex),
       ),

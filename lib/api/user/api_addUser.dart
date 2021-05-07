@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import '../model/user/addUser_model.dart';
+import 'package:login_fontend/model/user/addUser_model.dart';
 
 
   Future<AddUserModel> addUser(String email ,String password ,String first_name ,String last_name ,String rank ,String userid ) async{
@@ -7,11 +7,11 @@ import '../model/user/addUser_model.dart';
         final String apiUrl = "http://158.108.97.158:3000/api/mobile/admin/adduser?" ;
         final response = await http.post(apiUrl, body: {
         "email":  email ,
-        "password ":  password,
+        "password":  password,
         "first_name":  first_name,
-        "last_name ":  last_name,
-        "rank ":  rank,
-        "myUserId ":  userid ,
+        "last_name":  last_name,
+        "rank":  rank,
+        "myUserId":  userid ,
       }).timeout(const Duration(seconds: 5));
       if(response.statusCode == 200){
         //print("feaf");
@@ -24,7 +24,6 @@ import '../model/user/addUser_model.dart';
     }catch(e) { 
       //print(e) ;
       return null;
-      
     }
 
   

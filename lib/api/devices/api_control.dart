@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import '../../model/devices/control_model.dart';
+import 'package:login_fontend/model/devices/control_model.dart';
 
 
   Future<ControlModel> control(String action,String deviceId) async{

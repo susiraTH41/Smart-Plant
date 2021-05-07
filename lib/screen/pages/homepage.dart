@@ -6,7 +6,6 @@ class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
-
 class _HomePageState extends State<HomePage> {
   InAppWebViewController controller;
   String url="http://158.108.97.158:3000/home"; 
@@ -14,6 +13,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
+        ),
       body: SafeArea(
         child: Container(
             child: Column(

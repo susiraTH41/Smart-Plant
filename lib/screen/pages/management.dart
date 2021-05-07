@@ -1,105 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:login_fontend/model/login_model.dart';
 import 'package:login_fontend/screen/tamplate/menu_item.dart';
+import 'package:login_fontend/screen/pages/management/adduser.dart';
+import 'package:login_fontend/screen/pages/management/alluser.dart';
+import 'package:login_fontend/screen/pages/management/alldevices.dart';
 
-class Management extends StatelessWidget {
-  UserModel user ;
-  Management(this.user);
+
+
+class Management extends StatefulWidget {
+   UserModel user ;
+   Management(this.user);
+  //Management({Key key}) : super(key: key);
+  @override
+  _ManagementState createState() => _ManagementState(this.user);
+}
+
+class _ManagementState extends State<Management> with SingleTickerProviderStateMixin {
+  TabController controller;
+  UserModel user;
+  _ManagementState(this.user);
+  @override
+  void initState(){
+    super.initState();
+    controller = TabController(length: 2, vsync: this);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: Row(children: [
-                  BuildMenuItem(
-                  title:"Add User",
-                  color: Colors.green[400],
-                  onTap: (){
-                    print("1");
-                  }, 
-                  icon: Icon(Icons.person_add_alt_1,color: Colors.white,size:50)
-                ),BuildMenuItem(
-                  title:"Add Device",
-                  color: Colors.green[400],
-                  onTap: (){
-                    print("1");
-                  }, 
-                  icon: Icon(Icons.add_to_queue_sharp,color: Colors.white,size:50)
-                ),
-                
-            ],)
-              ),Row(
-                children: [
-                  BuildMenuItem(
-                  title:"Delete User",
-                  color: Colors.red[400],
-                  onTap: (){
-                    print("1");
-                  }, 
-                  icon: Icon(Icons.person_remove,color: Colors.white,size:50)
-                ),
-                BuildMenuItem(
-                  title:"Delete Device",
-                  color: Colors.red[400],
-                  onTap: (){
-                    print("1");
-                  }, 
-                  icon: Icon(Icons.remove_from_queue,color: Colors.white,size:50)
-                ),
-                 
-                ],
-              ),
-              Row(
-                  children: [
-                  BuildMenuItem(
-                    title:"Edit User",
-                    color: Colors.yellow[700],
-                    onTap: (){
-                      print("1");
-                    }, 
-                    icon: Icon(Icons.edit,color: Colors.white,size:50)
-                  ),
-                  BuildMenuItem(
-                    title:"Edit Device",
-                    color: Colors.yellow[700],
-                    onTap: (){
-                      print("1");
-                    }, 
-                    icon: Icon(Icons.edit,color: Colors.white,size:50)
-                  ),
-                
-            ],)
-              ,Row(
-                children: [
-                   BuildMenuItem(
-                    title:"Search User",
-                    color: Colors.lightBlue[700],
-                    onTap: (){
-                      print("1");
-                    }, 
-                    icon: Icon(Icons.person_search,color: Colors.white,size:50)
-                  ),
-                  
-                  BuildMenuItem(
-                    title:"Status Device",
-                    color: Colors.lightBlue[700],
-                    onTap: (){
-                      print("1");
-                    }, 
-                    icon: Icon(Icons.desktop_windows,color: Colors.white,size:50)
-                  ),
-                ],
-              ),
-            
-              
-              
-            ],
-          ),
-        ),
-      
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Management'),
+        bottom: TabBar(
+    labelColor: Color(0xffffffff), // สีของข้อความปุ่มที่เลือก
+    unselectedLabelColor: Color(0x55ffffff), // สีของข้อความปุ่มที่ไม่ได้เลือก
+    tabs: <Tab>[
+        Tab(icon: Icon(Icons.person_search), text: 'User Management'),
+        Tab(icon: Icon(Icons.desktop_windows), text: 'Devices Management'),
+    ],
+    controller: controller,
+),
+      ),
+      body: TabBarView(
+    children: <Widget>[AllUser(title:'หน้า 1',user:this.user), AllDevices(title:'หน้า 2',user:this.user)],
+    controller: controller,
+),
+     
     );
   }
 }

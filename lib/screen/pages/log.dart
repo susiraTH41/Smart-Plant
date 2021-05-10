@@ -7,12 +7,14 @@ class Logs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            appBar: AppBar(
-              title: Text('Logs'),
-            ),
-            body: Center(
-                 child: Text("Logs", ),
-                )
-          );
+        backgroundColor: Colors.blueGrey[100],
+        appBar: AppBar(
+          title: Text('Logs'),
+        ),
+        body: Center(
+          child: Text(
+            "Logs",
+          ),
+        ));
   }
 }

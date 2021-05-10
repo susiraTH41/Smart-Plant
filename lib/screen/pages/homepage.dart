@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class HomePage extends StatefulWidget {
-  
   @override
   _HomePageState createState() => _HomePageState();
 }
+
 class _HomePageState extends State<HomePage> {
   InAppWebViewController controller;
-  String url="http://158.108.97.158:3000/home"; 
+  String url = "http://158.108.97.158:3000/home";
   double progress = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey[100],
       appBar: AppBar(
         title: Text('Home'),
-        ),
+      ),
       body: SafeArea(
         child: Container(
             child: Column(
@@ -29,13 +30,14 @@ class _HomePageState extends State<HomePage> {
             ),
             Expanded(
                 child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white)),
+              decoration:
+                  BoxDecoration(border: Border.all(color: Colors.white)),
               child: InAppWebView(
                 initialUrl: url,
                 initialHeaders: {},
                 initialOptions: InAppWebViewGroupOptions(
-                    crossPlatform: InAppWebViewOptions(debuggingEnabled: false)),
+                    crossPlatform:
+                        InAppWebViewOptions(debuggingEnabled: false)),
                 onWebViewCreated: (webViewController) =>
                     controller = webViewController,
                 onLoadStart: (controller, url) {

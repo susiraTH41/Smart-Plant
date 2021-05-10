@@ -15,7 +15,7 @@ class Profile extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Center(
               child: ListView(children: [
-            buildTextField( "E-mail",this.user.userinfo.email),
+            buildTextField("E-mail", this.user.userinfo.email),
             buildTextField("Firstname", this.user.userinfo.firstName),
             buildTextField("Lastname", this.user.userinfo.lastName),
             buildTextField("rank", this.user.userinfo.rank),
@@ -27,6 +27,7 @@ class Profile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 35.0),
       child: TextField(
+        enabled: false,
         decoration: InputDecoration(
             contentPadding: EdgeInsets.only(bottom: 3),
             labelText: labelText,

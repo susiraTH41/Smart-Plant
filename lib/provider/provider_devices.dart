@@ -16,9 +16,6 @@ class DevicesProvider with ChangeNotifier {
     loading = true;
     alldevices = await allDevices(myUserId);
     loading = false;
-    print('ddqwdqwdqwdqwd${alldevices.data.length}');
-    print(deviceID);
-    print(place);
     await addInfoOfDevices();
     //notifyListeners();
   }

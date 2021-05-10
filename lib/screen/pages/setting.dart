@@ -8,10 +8,10 @@ class Setting extends StatelessWidget {
   UserModel user;
   Setting(this.user);
   final List<String> materialIndices = ["Profile", "Setting", "Logout"];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.blueGrey[100],
         appBar: AppBar(
           title: Text('Setting'),
         ),

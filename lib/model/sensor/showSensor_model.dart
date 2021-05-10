@@ -1,19 +1,39 @@
 // To parse this JSON data, do
 //
-//     final pollutionsModel = pollutionsModelFromJson(jsonString);
+//     final showSensorModel = showSensorModelFromJson(jsonString);
 
 import 'dart:convert';
 
-List<PollutionsModel> pollutionsModelFromJson(String str) => List<PollutionsModel>.from(json.decode(str).map((x) => PollutionsModel.fromJson(x)));
+ShowSensorModel showSensorModelFromJson(String str) => ShowSensorModel.fromJson(json.decode(str));
 
-String pollutionsModelToJson(List<PollutionsModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String showSensorModelToJson(ShowSensorModel data) => json.encode(data.toJson());
 
-class PollutionsModel {
-    PollutionsModel({
+class ShowSensorModel {
+    ShowSensorModel({
+        this.success,
+        this.data,
+    });
+
+    bool success;
+    Data data;
+
+    factory ShowSensorModel.fromJson(Map<String, dynamic> json) => ShowSensorModel(
+        success: json["success"] == null ? null : json["success"],
+        data: json["data"] == null ? null : Data.fromJson(json["data"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "success": success == null ? null : success,
+        "data": data == null ? null : data.toJson(),
+    };
+}
+
+class Data {
+    Data({
         this.id,
         this.deviceId,
         this.deviceStatus,
-        this.plans,
+        this.place,
         this.battery,
         this.no2,
         this.pm1,
@@ -30,7 +50,7 @@ class PollutionsModel {
     int id;
     String deviceId;
     int deviceStatus;
-    String plans;
+    String place;
     int battery;
     int no2;
     int pm1;
@@ -43,11 +63,11 @@ class PollutionsModel {
     DateTime createdAt;
     DateTime updatedAt;
 
-    factory PollutionsModel.fromJson(Map<String, dynamic> json) => PollutionsModel(
+    factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"] == null ? null : json["id"],
         deviceId: json["deviceID"] == null ? null : json["deviceID"],
         deviceStatus: json["deviceStatus"] == null ? null : json["deviceStatus"],
-        plans: json["plans"] == null ? null : json["plans"],
+        place: json["place"] == null ? null : json["place"],
         battery: json["battery"] == null ? null : json["battery"],
         no2: json["no2"] == null ? null : json["no2"],
         pm1: json["pm1"] == null ? null : json["pm1"],
@@ -65,7 +85,7 @@ class PollutionsModel {
         "id": id == null ? null : id,
         "deviceID": deviceId == null ? null : deviceId,
         "deviceStatus": deviceStatus == null ? null : deviceStatus,
-        "plans": plans == null ? null : plans,
+        "place": place == null ? null : place,
         "battery": battery == null ? null : battery,
         "no2": no2 == null ? null : no2,
         "pm1": pm1 == null ? null : pm1,

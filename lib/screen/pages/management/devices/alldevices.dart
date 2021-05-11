@@ -59,11 +59,15 @@ class _AllDevicesState extends State<_AllDevices>
                         style: TextStyle(fontSize: 24.0)),
                     trailing: Icon(Icons.chevron_right),
                     onTap: () {
+                      print(alldevices.deviceStatus[index]);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => EditDevices(widget.user,
-                                alldevices.id[index], alldevices.place[index])),
+                            builder: (context) => EditDevices(
+                                widget.user,
+                                alldevices.id[index],
+                                alldevices.place[index],
+                                alldevices.deviceStatus[index])),
                       );
                     },
                   ),

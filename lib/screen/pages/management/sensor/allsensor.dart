@@ -57,16 +57,16 @@ class _AllSensorState extends State<_AllSensor>
                         style: TextStyle(fontSize: 24.0)),
                     trailing: Icon(Icons.chevron_right),
                     onTap: () {
-            
-                Navigator.push(
+                      print('fasfasf${allsensor.deviceStatus[index]}');
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => EditSensor(widget.user,
-                                allsensor.id[index], allsensor.place[index])),
+                            builder: (context) => EditSensor(
+                                widget.user,
+                                allsensor.id[index],
+                                allsensor.place[index],
+                                allsensor.deviceStatus[index])),
                       );
-
-
-
                     },
                   ),
                 );
@@ -75,7 +75,7 @@ class _AllSensorState extends State<_AllSensor>
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-           Navigator.push(
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => AddSensor(widget.user)),
           );

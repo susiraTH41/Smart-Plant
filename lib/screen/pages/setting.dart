@@ -49,8 +49,6 @@ class Setting extends StatelessWidget {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginPage()));
                 }
-                //   Navigator.push(
-                //     context, MaterialPageRoute(builder: (context) => Controsw(this.topic[index])));
               },
             ),
           );

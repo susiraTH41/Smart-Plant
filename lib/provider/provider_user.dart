@@ -15,21 +15,18 @@ class UserProvider with ChangeNotifier {
 
   @override
   void getPostUser(String myUserId) async {
-    loading = true;
     alluser = await allUser(myUserId);
-    loading = false;
     await addInfoOfUser();
-    //notifyListeners();
+    notifyListeners();
   }
 
   Future addInfoOfUser() async {
     try {
-      bool loading = false;
-      List<int> userId = [];
-      List<String> email = [];
-      List<String> first_name = [];
-      List<String> last_name = [];
-      List<String> rank = [];
+      this.userId = [];
+      this.email = [];
+      this.first_name = [];
+      this.last_name = [];
+      this.rank = [];
       bool success = alluser.success;
       if (success == true && alluser.alluser.length != this.email.length) {
         for (int i = 0; i < alluser.alluser.length; i++) {

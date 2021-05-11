@@ -10,31 +10,31 @@ class SensorProvider with ChangeNotifier {
   List<int> id = [];
   List<String> deviceID = [];
   List<String> place = [];
-
+  List<int> deviceStatus = [];
   @override
   void getPostSensor(String myUserId) async {
-    loading = true;
     allsensor = await allSensor(myUserId);
-    loading = false;
-    print('ddqwdqwdqwdqwd${allsensor.data.length}');
-    print('ddqwdqwdqwdqwd${id.length}');
-    print(deviceID);
-    print(place);
     await addInfoOfSensor();
-    //notifyListeners();
+    print(deviceStatus);
+    print(id);
+    print(place);
+    print(deviceID);
+    notifyListeners();
   }
 
   Future addInfoOfSensor() async {
     try {
-      List<int> id = [];
+      this.id = [];
       this.deviceID = [];
       this.place = [];
+      this.deviceStatus = [];
       bool success = allsensor.success;
       if (success == true && allsensor.data.length != id.length) {
         for (int i = 0; i < allsensor.data.length; i++) {
           this.id.add(allsensor.data[i].id);
           this.deviceID.add(allsensor.data[i].deviceId);
           this.place.add(allsensor.data[i].place);
+          this.deviceStatus.add(allsensor.data[i].deviceStatus);
         }
       }
     } catch (e) {

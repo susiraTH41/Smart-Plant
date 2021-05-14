@@ -60,11 +60,10 @@ class Devices extends StatelessWidget {
                       if (index == 2) {
                         Navigator.push(
                           context,
-                          PageRouteBuilder(
-                            pageBuilder: (context, a, b) => Cctv(
-                              this.user,
-                            ),
-                          ),
+                          MaterialPageRoute(
+                              builder: (context) => Cctv(
+                                  channel: IOWebSocketChannel.connect(
+                                      'ws://158.108.97.158:8000'))),
                         );
                       }
                       if (index == 3) {

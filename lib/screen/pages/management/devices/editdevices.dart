@@ -200,7 +200,7 @@ class _EditDevicesState extends State<EditDevices> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('You are closing this sensor ?'),
+          title: Text('You are closing this devices ?'),
           content: SingleChildScrollView(
             child: Column(
               children: <Widget>[

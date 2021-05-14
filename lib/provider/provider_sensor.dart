@@ -15,10 +15,6 @@ class SensorProvider with ChangeNotifier {
   void getPostSensor(String myUserId) async {
     allsensor = await allSensor(myUserId);
     await addInfoOfSensor();
-    print(deviceStatus);
-    print(id);
-    print(place);
-    print(deviceID);
     notifyListeners();
   }
 

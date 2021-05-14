@@ -36,7 +36,7 @@ class _AllDevicesState extends State<_AllDevices>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => false;
-
+  String text;
   @override
   void initState() {
     super.initState();
@@ -52,11 +52,15 @@ class _AllDevicesState extends State<_AllDevices>
           return ListView.builder(
               itemCount: alldevices.place.length,
               itemBuilder: (BuildContext content, int index) {
+                if (alldevices.isMqtt[index]) {
+                  text = '${alldevices.place[index]} (MQTT)';
+                } else {
+                  text = '${alldevices.place[index]} (LoRa)';
+                }
                 return Container(
                   color: Colors.white,
                   child: ListTile(
-                    title: Text('${alldevices.place[index]}',
-                        style: TextStyle(fontSize: 24.0)),
+                    title: Text(text, style: TextStyle(fontSize: 24.0)),
                     trailing: Icon(Icons.chevron_right),
                     onTap: () {
                       print(alldevices.deviceStatus[index]);

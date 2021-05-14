@@ -13,8 +13,8 @@ class AddUser extends StatefulWidget {
 }
 
 class _AddUserState extends State<AddUser> {
-   UserModel user;
-   _AddUserState(this.user);
+  UserModel user;
+  _AddUserState(this.user);
   @override
   var email = TextEditingController();
   var password = TextEditingController();
@@ -101,19 +101,56 @@ class _AddUserState extends State<AddUser> {
           margin: EdgeInsets.only(top: 16),
           padding: EdgeInsets.all(12)),
       onTap: () async {
-        addsubmit = await addUser(
-            this.email.text.trim(),
-            this.password.text.trim(),
-            this.first_name.text.trim(),
-            this.last_name.text.trim(),
-            this.dropdownValue,
-            this.user.userinfo.id.toString());
-        showDialog(
-          context: context,
-          builder: (BuildContext context) => CupertinoAlertDialog(
-            //content: Text('test'),
-            content: Text('${addsubmit.msg}'),
+        await _showMyDialog();
+        if (this.addsubmit != null) {
+          await showDialog(
+            context: context,
+            builder: (BuildContext context) => CupertinoAlertDialog(
+              //content: Text('test'),
+              title: Text('${addsubmit.msg}'),
+            ),
+          );
+        }
+        this.addsubmit = null;
+      },
+    );
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('You are adding this sensor ?'),
+          content: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Text('Are you srue ?'),
+              ],
+            ),
           ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Confirm'),
+              onPressed: () async {
+                this.addsubmit = await addUser(
+                    this.email.text.trim(),
+                    this.password.text.trim(),
+                    this.first_name.text.trim(),
+                    this.last_name.text.trim(),
+                    this.dropdownValue,
+                    this.user.userinfo.id.toString());
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
         );
       },
     );

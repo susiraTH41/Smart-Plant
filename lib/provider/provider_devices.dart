@@ -11,14 +11,11 @@ class DevicesProvider with ChangeNotifier {
   List<String> deviceID = [];
   List<String> place = [];
   List<int> deviceStatus = [];
+  List<bool> isMqtt = [];
   @override
   void getPostDevices(String myUserId) async {
     alldevices = await allDevices(myUserId);
     await addInfoOfDevices();
-    print(deviceStatus);
-    print(id);
-    print(place);
-    print(deviceID);
     notifyListeners();
   }
 
@@ -28,6 +25,7 @@ class DevicesProvider with ChangeNotifier {
       this.deviceID = [];
       this.place = [];
       this.deviceStatus = [];
+      this.isMqtt = [];
       bool success = alldevices.success;
       if (success == true && alldevices.data.length != id.length) {
         for (int i = 0; i < alldevices.data.length; i++) {
@@ -35,6 +33,7 @@ class DevicesProvider with ChangeNotifier {
           this.deviceID.add(alldevices.data[i].deviceId);
           this.place.add(alldevices.data[i].place);
           this.deviceStatus.add(alldevices.data[i].deviceStatus);
+          this.isMqtt.add(alldevices.data[i].isMqtt);
         }
       }
     } catch (e) {

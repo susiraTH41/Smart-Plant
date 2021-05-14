@@ -30,6 +30,8 @@ class _EditUserState extends State<EditUser> {
   String first_name;
   String last_name;
   String dropdownValue = "";
+  String text;
+  List<Color> colors;
   var email_controll = TextEditingController();
   var first_name_controll = TextEditingController();
   var last_name_controll = TextEditingController();
@@ -39,49 +41,53 @@ class _EditUserState extends State<EditUser> {
   EditUserModel editsubmit;
   UpdateUserModel updatesubmit;
   Widget build(BuildContext context) {
-    if (this.email == "beer@hotmail.com") {
+    if (dropdownValue != "SUSPEND") {
+      this.text = "SUSPEND";
+      colors = [Colors.red, Colors.red[400], Colors.red[700]];
+      if (this.userId == 1) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('Edit User'),
+          ),
+          body: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Center(
+                  child: ListView(children: [
+                buildTextField("E-mail", email, email_controll),
+                buildTextField("Firstname", first_name, first_name_controll),
+                buildTextField("Lastname", last_name, last_name_controll),
+                buildButtonSignIn()
+              ]))),
+        );
+      } else if (this.dropdownValue != "SUSPEND" && this.userId != 1) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('Edit User'),
+          ),
+          body: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Center(
+                  child: ListView(children: [
+                buildTextField("E-mail", email, email_controll),
+                buildTextField("Firstname", first_name, first_name_controll),
+                buildTextField("Lastname", last_name, last_name_controll),
+                builddropdowns(),
+                buildButtonSignIn(),
+                buildButtonCloseSystem()
+              ]))),
+        );
+      }
+    } else if (dropdownValue == "SUSPEND") {
+      this.text = "UNSUSPEND";
+      colors = [Colors.green, Colors.green[400], Colors.green[700]];
       return Scaffold(
         appBar: AppBar(
           title: Text('Edit User'),
         ),
         body: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Center(
-                child: ListView(children: [
-              buildTextField("E-mail", email, email_controll),
-              buildTextField("Firstname", first_name, first_name_controll),
-              buildTextField("Lastname", last_name, last_name_controll),
-              buildButtonSignIn()
-            ]))),
-      );
-    }
-    if (this.dropdownValue != "SUSPEND" && this.email != "beer@hotmail.com") {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Edit User'),
-        ),
-        body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Center(
-                child: ListView(children: [
-              buildTextField("E-mail", email, email_controll),
-              buildTextField("Firstname", first_name, first_name_controll),
-              buildTextField("Lastname", last_name, last_name_controll),
-              builddropdowns(),
-              buildButtonSignIn()
-            ]))),
-      );
-    }
-    if (this.dropdownValue == "SUSPEND") {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Edit User'),
-        ),
-        body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Center(
-                child: ListView(
-                    children: [builddropdowns(), buildButtonSignIn()]))),
+            child:
+                Center(child: ListView(children: [buildButtonCloseSystem()]))),
       );
     }
   }
@@ -128,7 +134,6 @@ class _EditUserState extends State<EditUser> {
         'ADMIN',
         'STAFF',
         'TECHNIC',
-        'SUSPEND'
       ].map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
@@ -195,6 +200,93 @@ class _EditUserState extends State<EditUser> {
             ),
           );
         }
+      },
+    );
+  }
+
+  Widget buildButtonCloseSystem() {
+    return InkWell(
+      child: Container(
+          constraints: BoxConstraints.expand(height: 50, width: 100),
+          child: Text(this.text,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18, color: Colors.white)),
+          decoration: BoxDecoration(
+              gradient: LinearGradient(colors: colors),
+              borderRadius: BorderRadius.circular(16),
+              color: Colors.green[200]),
+          margin: EdgeInsets.only(top: 16),
+          padding: EdgeInsets.all(12)),
+      onTap: () async {
+        await _showMyDialog();
+        if (this.updatesubmit != null) {
+          if (this.updatesubmit.success == true) {
+            if (this.dropdownValue == "SUSPEND") {
+              setState(() {
+                this.text = "UNSUSPEND";
+                this.colors = [
+                  Colors.green,
+                  Colors.green[400],
+                  Colors.green[700]
+                ];
+              });
+            } else if (this.dropdownValue != "SUSPEND") {
+              setState(() {
+                this.text = "SUSPEND";
+                this.colors = [Colors.red, Colors.red[400], Colors.red[700]];
+              });
+            }
+          }
+          await showDialog(
+            context: context,
+            builder: (BuildContext context) => CupertinoAlertDialog(
+              //content: Text('test'),
+              title: Text('${updatesubmit.msg}'),
+            ),
+          );
+        }
+        this.updatesubmit = null;
+      },
+    );
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Are you srue ?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Confirm'),
+              onPressed: () async {
+                if (this.dropdownValue == "SUSPEND") {
+                  this.dropdownValue = "MEMBER";
+                  updatesubmit = await updateUser(
+                    this.userId.toString(),
+                    this.dropdownValue,
+                    this.user.userinfo.id.toString(),
+                  );
+                } else if (this.dropdownValue != "SUSPEND") {
+                  this.dropdownValue = "SUSPEND";
+                  updatesubmit = await updateUser(
+                    this.userId.toString(),
+                    this.dropdownValue,
+                    this.user.userinfo.id.toString(),
+                  );
+                }
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
       },
     );
   }

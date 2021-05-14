@@ -13,8 +13,8 @@ class AddDevicesLora extends StatefulWidget {
 }
 
 class _AddDevicesLoraState extends State<AddDevicesLora> {
-   UserModel user;
-   _AddDevicesLoraState(this.user);
+  UserModel user;
+  _AddDevicesLoraState(this.user);
   @override
   var device_eui = TextEditingController();
   var device_name = TextEditingController();
@@ -53,7 +53,6 @@ class _AddDevicesLoraState extends State<AddDevicesLora> {
     );
   }
 
-
   Widget buildButtonSubmit() {
     return InkWell(
       child: Container(
@@ -69,16 +68,54 @@ class _AddDevicesLoraState extends State<AddDevicesLora> {
           margin: EdgeInsets.only(top: 16),
           padding: EdgeInsets.all(12)),
       onTap: () async {
-        addsubmit = await addDevicesLora(
-            this.user.userinfo.id.toString(),
-            this.device_eui.text.trim(),
-            this.device_name.text.trim(),);
-        showDialog(
-          context: context,
-          builder: (BuildContext context) => CupertinoAlertDialog(
-            //content: Text('test'),
-            content: Text('${addsubmit.msg}'),
+        await _showMyDialog();
+        if (this.addsubmit != null) {
+          await showDialog(
+            context: context,
+            builder: (BuildContext context) => CupertinoAlertDialog(
+              //content: Text('test'),
+              title: Text('${addsubmit.msg}'),
+            ),
+          );
+        }
+        this.addsubmit = null;
+      },
+    );
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('You are adding this device ?'),
+          content: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Text('Are you srue ?'),
+              ],
+            ),
           ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Confirm'),
+              onPressed: () async {
+                addsubmit = await addDevicesLora(
+                  this.user.userinfo.id.toString(),
+                  this.device_eui.text.trim(),
+                  this.device_name.text.trim(),
+                );
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
         );
       },
     );

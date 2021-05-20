@@ -4,10 +4,10 @@ import 'package:login_fontend/screen/tamplate/menu_item.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
-import 'device/cctv.dart';
+import 'device/allcctv.dart';
 import 'device/sensor.dart';
 import 'device/lights.dart';
-import 'device/door.dart';
+import 'device/Alldevices.dart';
 import 'device/data.dart';
 //import 'package:login_fontend/api/devices/api_pollutions.dart';
 
@@ -41,7 +41,7 @@ class Devices extends StatelessWidget {
                         Navigator.push(
                           context,
                           PageRouteBuilder(
-                            pageBuilder: (context, a, b) => Door(
+                            pageBuilder: (context, a, b) => AllDevices(
                               this.user,
                             ),
                           ),
@@ -50,23 +50,11 @@ class Devices extends StatelessWidget {
                       if (index == 1) {
                         Navigator.push(
                           context,
-                          PageRouteBuilder(
-                            pageBuilder: (context, a, b) => Lights(
-                              this.user,
-                            ),
-                          ),
+                          MaterialPageRoute(
+                              builder: (context) => AllCctv(this.user,)),
                         );
                       }
                       if (index == 2) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Cctv(
-                                  channel: IOWebSocketChannel.connect(
-                                      'ws://158.108.97.158:8000'))),
-                        );
-                      }
-                      if (index == 3) {
                         Navigator.push(
                           context,
                           PageRouteBuilder(

@@ -28,7 +28,7 @@ class DevicesProvider with ChangeNotifier {
       this.isMqtt = [];
       bool success = alldevices.success;
       if (success == true && alldevices.data.length != id.length) {
-        for (int i = 0; i < alldevices.data.length; i++) {
+        for (int i = 0; i < alldevices.data.length ; i++) {
           this.id.add(alldevices.data[i].id);
           this.deviceID.add(alldevices.data[i].deviceId);
           this.place.add(alldevices.data[i].place);

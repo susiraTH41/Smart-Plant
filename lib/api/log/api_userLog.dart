@@ -1,18 +1,17 @@
 import 'package:http/http.dart' as http;
-import 'package:login_fontend/model/sensor/showSensor_model.dart';
+import 'package:login_fontend/model/log/adminLog_model.dart';
 
-Future<ShowSensorModel> showSensor(String device_id, String myUserId) async {
+Future<AdminLog> userLog(String userid) async {
   try {
     final String apiUrl =
-        "http://158.108.97.160:3000/api/mobile/admin/sensor/info?";
+        "http://158.108.97.160:3000/api/mobile/admin/user/logs?";
     final response = await http.post(apiUrl, body: {
-      "device_id": device_id,
-      "myUserId": myUserId
+      "myUserId": userid,
     }).timeout(const Duration(seconds: 5));
     if (response.statusCode == 200) {
       //print("feaf");
       final String responseString = response.body;
-      return showSensorModelFromJson(responseString);
+      return adminLogFromJson(responseString);
     } else {
       //print("fas");
       return null;

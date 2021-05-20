@@ -5,7 +5,7 @@ Future<EditDevicesModel> editDevices(
     String device_id, String device_new_name, String myUserId) async {
   try {
     final String apiUrl =
-        "http://158.108.97.158:3000/api/mobile/admin/device/edit/name?";
+        "http://158.108.97.160:3000/api/mobile/admin/device/edit/name?";
     final response = await http.post(apiUrl, body: {
       "device_id": device_id,
       "device_new_name": device_new_name,

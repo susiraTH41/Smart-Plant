@@ -4,7 +4,7 @@ import 'package:login_fontend/model/login_model.dart';
 Future<UserModel> loginUser(
     String emailController, String passwordController) async {
   try {
-    final String apiUrl = "http://158.108.97.158:3000/api/mobile/login?";
+    final String apiUrl = "http://158.108.97.160:3000/api/mobile/login?";
     final response = await http.post(apiUrl, body: {
       "email": emailController,
       "password": passwordController

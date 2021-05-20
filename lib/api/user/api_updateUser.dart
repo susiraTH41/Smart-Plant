@@ -4,7 +4,7 @@ import 'package:login_fontend/model/user/updateUser_model.dart';
 
   Future<UpdateUserModel> updateUser(String userId  ,String rank  ,String myUserId   ) async{
     try{
-        final String apiUrl = "http://158.108.97.158:3000/api/mobile/admin/update-status?" ;
+        final String apiUrl = "http://158.108.97.160:3000/api/mobile/admin/update-status?" ;
         final response = await http.post(apiUrl, body: {
         "userId":  userId  ,
         "rank":  rank,

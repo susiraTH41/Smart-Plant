@@ -6,7 +6,7 @@ import 'package:login_fontend/screen/pages/management/user/adduser.dart';
 import 'package:login_fontend/screen/pages/management/user/alluser.dart';
 import 'package:login_fontend/screen/pages/management/devices/alldevices.dart';
 import 'package:login_fontend/screen/pages/management/sensor/allsensor.dart';
-
+import 'package:login_fontend/screen/pages/management/cctv/allcctv.dart';
 class Management extends StatefulWidget {
   UserModel user;
   Management(this.user);
@@ -23,7 +23,7 @@ class _ManagementState extends State<Management>
   @override
   void initState() {
     super.initState();
-    controller = TabController(length: 3, vsync: this);
+    controller = TabController(length: 4, vsync: this);
   }
 
   @override
@@ -40,6 +40,7 @@ class _ManagementState extends State<Management>
             Tab(icon: Icon(Icons.person_search), text: 'User'),
             Tab(icon: Icon(Icons.desktop_windows), text: 'Devices'),
             Tab(icon: Icon(Icons.cloud), text: 'Sensor'),
+            Tab(icon: Icon(Icons.photo_camera_front), text: 'CCTV'),
           ],
           controller: controller,
         ),
@@ -48,7 +49,8 @@ class _ManagementState extends State<Management>
         children: <Widget>[
           AllUser(title: 'หน้า 1', user: this.user),
           AllDevices(title: 'หน้า 2', user: this.user),
-          AllSensor(title: 'หน้า 3', user: this.user)
+          AllSensor(title: 'หน้า 3', user: this.user),
+          AllCctv(title: 'หน้า 3', user: this.user)
         ],
         controller: controller,
       ),

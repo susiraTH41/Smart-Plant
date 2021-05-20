@@ -12,21 +12,16 @@ class Page {
 List<Page> planets = [
   Page(
     1,
-    name: 'Doors',
+    name: 'Devices',
     des: 'Open / Close',
   ),
   Page(
     2,
-    name: 'Lights',
-    des: 'Trun on / Trun off',
-  ),
-  Page(
-    3,
     name: 'CCTV',
     des: 'Monitor cameras',
   ),
   Page(
-    4,
+    3,
     name: 'Sensor',
     des: 'Check pollutions',
   ),

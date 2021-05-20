@@ -4,7 +4,7 @@ import 'package:login_fontend/model/user/changePass_model.dart';
 
   Future<ChangePasswordrModel> changePass(String email  ,String userId  ,String new_password  ,String confirm_new_password  ) async{
     try{
-        final String apiUrl = "http://158.108.97.158:3000/api/mobile/user/change-password?" ;
+        final String apiUrl = "http://158.108.97.160:3000/api/mobile/user/change-password?" ;
         final response = await http.post(apiUrl, body: {
         "email":  email  ,
         "userId":  userId ,

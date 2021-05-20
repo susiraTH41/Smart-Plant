@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_fontend/model/login_model.dart';
+import 'package:login_fontend/screen/pages/log.dart';
 import 'package:login_fontend/screen/pages/setting.dart';
 import 'package:login_fontend/screen/pages/homepage.dart';
 import 'package:login_fontend/screen/pages/devices.dart';
@@ -14,12 +15,13 @@ class MenuMember extends StatefulWidget {
 class _MenuMemberState extends State<MenuMember> {
   UserModel user;
   _MenuMemberState(this.user);
-  int _selectedIndex = 1;
+  int _selectedIndex = 2;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   List<Widget> _pageWidget() => <Widget>[
         Devices(this.user),
+        Logs(this.user),
         HomePage(),
         Setting(this.user),
       ];
@@ -42,6 +44,10 @@ class _MenuMemberState extends State<MenuMember> {
           BottomNavigationBarItem(
             icon: Icon(Icons.sensor_door_outlined),
             label: 'Controls',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt),
+            label: 'Logs',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),

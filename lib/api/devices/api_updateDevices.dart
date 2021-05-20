@@ -4,7 +4,7 @@ import 'package:login_fontend/model/devices/updateDevices_model.dart';
 
   Future<UpdateDevicesModel> updateDevices(String device_id  ,String state   ,String myUserId    ) async{
     try{
-        final String apiUrl = "http://158.108.97.158:3000/api/mobile/admin/device/edit/enable?" ;
+        final String apiUrl = "http://158.108.97.160:3000/api/mobile/admin/device/edit/enable?" ;
         final response = await http.post(apiUrl, body: {
         "device_id":  device_id  ,
         "state":  state ,

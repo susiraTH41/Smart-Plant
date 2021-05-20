@@ -4,7 +4,7 @@ import 'package:login_fontend/model/user/addUser_model.dart';
 
   Future<AddUserModel> addUser(String email ,String password ,String first_name ,String last_name ,String rank ,String userid ) async{
     try{
-        final String apiUrl = "http://158.108.97.158:3000/api/mobile/admin/adduser?" ;
+        final String apiUrl = "http://158.108.97.160:3000/api/mobile/admin/adduser?" ;
         final response = await http.post(apiUrl, body: {
         "email":  email ,
         "password":  password,

@@ -33,8 +33,6 @@ class _EditSensorState extends State<EditSensor> {
   EditSensorModel editsubmit;
   UpdateSensorModel updatesubmit;
   Widget build(BuildContext context) {
-    print('fasfasf${deviceStatus}');
-    print('fasfasf${deviceId}');
     if (deviceStatus == 1) {
       this.text = "Open system";
       colors = [Colors.green, Colors.green[400], Colors.green[700]];

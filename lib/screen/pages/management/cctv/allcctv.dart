@@ -60,12 +60,17 @@ class _AllCctvState extends State<_AllCctv> with AutomaticKeepAliveClientMixin {
                     trailing: Icon(Icons.chevron_right),
                     onTap: () {
                       //print('fasfasf${allcctv.deviceStatus[index]}');
-                       Navigator.push(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => EditCctv(
-                                  widget.user, allcctv.name[index], allcctv.status[index], allcctv.url[index]
-                                )),
+                                widget.user,
+                                allcctv.name[index],
+                                allcctv.status[index],
+                                allcctv.user_cctv[index],
+                                allcctv.pass_cctv[index],
+                                allcctv.ip[index].toString(),
+                                allcctv.id_cctv[index].toString())),
                       );
                     },
                   ),

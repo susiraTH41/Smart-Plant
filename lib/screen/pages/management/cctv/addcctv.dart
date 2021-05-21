@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:login_fontend/api/sensor/api_addSensor.dart';
+import 'package:login_fontend/api/cctv/api_addCctv.dart';
 import 'package:login_fontend/model/sensor/addSensor_model.dart';
 import 'package:login_fontend/model/login_model.dart';
 
@@ -22,7 +22,7 @@ class _AddCctvState extends State<AddCctv> {
   var port_cctv = TextEditingController();
   var user_cctv = TextEditingController();
   var password_cctv = TextEditingController();
-  //AddCctvModel addsubmit;
+  AddSensorModel addsubmit;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -76,16 +76,17 @@ class _AddCctvState extends State<AddCctv> {
           padding: EdgeInsets.all(12)),
       onTap: () async {
         await _showMyDialog();
-        /*  if (this.addsubmit != null) {
+        if (this.addsubmit != null) {
           await showDialog(
             context: context,
             builder: (BuildContext context) => CupertinoAlertDialog(
-              
               title: Text('${addsubmit.msg}'),
             ),
           );
         }
-        this.addsubmit = null;*/
+        print(
+            'dwqdwqd${this.ip_cctv.text.trim()}:${this.port_cctv.text.trim()}');
+        this.addsubmit = null;
       },
     );
   }
@@ -96,7 +97,7 @@ class _AddCctvState extends State<AddCctv> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('You are adding this sensor ?'),
+          title: Text('You are adding this CCTV ?'),
           content: SingleChildScrollView(
             child: Column(
               children: <Widget>[
@@ -108,15 +109,14 @@ class _AddCctvState extends State<AddCctv> {
             TextButton(
               child: Text('Confirm'),
               onPressed: () async {
-                /* this.addsubmit = await addCctv(
-                  this.user.userinfo.id.toString(),
+                this.addsubmit = await addCctv(
                   this.name_cctv.text.trim(),
-                  this.ip_cctv.text.trim(),
-                  this.port_cctv.text.trim(),
-                  this.User_cctv.text.trim(),
-                  this.Password_cctv.text.trim(),
+                  '${this.ip_cctv.text.trim()}:${this.port_cctv.text.trim()}',
+                  this.user_cctv.text.trim(),
+                  this.password_cctv.text.trim(),
+                  this.user.userinfo.id.toString(),
                 );
-                Navigator.of(context).pop();*/
+                Navigator.of(context).pop();
               },
             ),
             TextButton(

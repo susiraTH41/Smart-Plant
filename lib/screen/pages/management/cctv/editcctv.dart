@@ -1,42 +1,49 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:login_fontend/api/sensor/api_editSensor.dart';
-import 'package:login_fontend/model/sensor/editSensor_model.dart';
-import 'package:login_fontend/api/sensor/api_updateSensor.dart';
-import 'package:login_fontend/model/sensor/updateSensor_model.dart';
+import 'package:login_fontend/api/cctv/api_editCctv.dart';
+import 'package:login_fontend/model/sensor/addSensor_model.dart';
+import 'package:login_fontend/api/cctv/api_updateCctv.dart';
+import 'package:login_fontend/model/sensor/addSensor_model.dart';
 import 'package:login_fontend/model/login_model.dart';
 
 class EditCctv extends StatefulWidget {
   UserModel user;
-  var name_cctv;
-  var ip_cctv;
+  String name_cctv;
+  String ip_cctv;
+  String user_cctv;
+  String pass_cctv;
   var deviceStatus;
-  EditCctv(this.user, this.name_cctv, this.deviceStatus, this.ip_cctv);
+  String deviceId;
+  EditCctv(this.user, this.name_cctv, this.deviceStatus, this.user_cctv,
+      this.pass_cctv, this.ip_cctv, this.deviceId);
   //EditUser({Key key}) : super(key: key);
   @override
-  _EditCctvState createState() =>
-      _EditCctvState(user, name_cctv, deviceStatus, ip_cctv);
+  _EditCctvState createState() => _EditCctvState(
+      user, name_cctv, deviceStatus, user_cctv, pass_cctv, ip_cctv, deviceId);
 }
+
 //_EditDevicesState
 class _EditCctvState extends State<EditCctv> {
   UserModel user;
-  var name_cctv;
-  var ip_cctv;
+  String name_cctv;
+  String ip_cctv;
+  String user_cctv;
+  String pass_cctv;
   var deviceStatus;
+  var deviceId;
   var name_cctv_controll = TextEditingController();
   var ip_cctv_controll = TextEditingController();
+  var user_cctv_controll = TextEditingController();
+  var pass_cctv_controll = TextEditingController();
+  var deviceId_controll = TextEditingController();
   String text;
   List<Color> colors;
-  _EditCctvState(
-    this.user,
-    this.name_cctv,
-    this.deviceStatus,
-    this.ip_cctv,
-  );
+  _EditCctvState(this.user, this.name_cctv, this.deviceStatus, this.user_cctv,
+      this.pass_cctv, this.ip_cctv, this.deviceId);
   @override
-//  EditCctvModel editsubmit;
-//  UpdateSensorModel updatesubmit;
+  AddSensorModel editsubmit;
+  AddSensorModel updatesubmit;
   Widget build(BuildContext context) {
     if (deviceStatus == 1) {
       this.text = "Open system";
@@ -55,6 +62,8 @@ class _EditCctvState extends State<EditCctv> {
               child: ListView(children: [
             buildTextField("Name", name_cctv, name_cctv_controll),
             buildTextField("URL", ip_cctv, ip_cctv_controll),
+            buildTextField("User", user_cctv, user_cctv_controll),
+            buildTextField("password", pass_cctv, pass_cctv_controll),
             buildButtonSubmit(),
             buildButtonCloseSystem(),
           ]))),
@@ -96,7 +105,7 @@ class _EditCctvState extends State<EditCctv> {
           padding: EdgeInsets.all(12)),
       onTap: () async {
         await _showMyDialog();
-        /*  if (this.editsubmit != null) {
+        if (this.editsubmit != null) {
           await showDialog(
             context: context,
             builder: (BuildContext context) => CupertinoAlertDialog(
@@ -105,13 +114,13 @@ class _EditCctvState extends State<EditCctv> {
             ),
           );
         }
-        this.editsubmit = null;*/
+        this.editsubmit = null;
       },
     );
   }
 
   Future<void> _showMyDialog() async {
-    /* return showDialog<void>(
+    return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
@@ -128,13 +137,28 @@ class _EditCctvState extends State<EditCctv> {
             TextButton(
               child: Text('Confirm'),
               onPressed: () async {
-                if (this.device_new_name_controll.text.trim() == "") {
-                  this.device_new_name_controll =
-                      TextEditingController(text: this.device_new_name);
+                if (this.name_cctv_controll.text.trim() == "") {
+                  this.name_cctv_controll =
+                      TextEditingController(text: this.name_cctv);
+                }
+                if (this.ip_cctv_controll.text.trim() == "") {
+                  this.ip_cctv_controll =
+                      TextEditingController(text: this.ip_cctv);
+                }
+                if (this.user_cctv_controll.text.trim() == "") {
+                  this.user_cctv_controll =
+                      TextEditingController(text: this.user_cctv);
+                }
+                if (this.pass_cctv_controll.text.trim() == "") {
+                  this.pass_cctv_controll =
+                      TextEditingController(text: this.pass_cctv);
                 }
                 this.editsubmit = await editCctv(
                   this.deviceId.toString(),
-                  this.device_new_name_controll.text.trim(),
+                  this.name_cctv_controll.text.trim(),
+                  this.ip_cctv_controll.text.trim(),
+                  this.user_cctv_controll.text.trim(),
+                  this.pass_cctv_controll.text.trim(),
                   this.user.userinfo.id.toString(),
                 );
                 Navigator.of(context).pop();
@@ -149,7 +173,7 @@ class _EditCctvState extends State<EditCctv> {
           ],
         );
       },
-    );*/
+    );
   }
 
   Widget buildButtonCloseSystem() {
@@ -166,7 +190,7 @@ class _EditCctvState extends State<EditCctv> {
           margin: EdgeInsets.only(top: 16),
           padding: EdgeInsets.all(12)),
       onTap: () async {
-        /*  await _showMyDialogclose();
+        await _showMyDialogclose();
         if (this.updatesubmit != null) {
           if (this.updatesubmit.success == true) {
             if (this.deviceStatus == 0) {
@@ -193,7 +217,7 @@ class _EditCctvState extends State<EditCctv> {
             ),
           );
         }
-        this.updatesubmit = null;*/
+        this.updatesubmit = null;
       },
     );
   }
@@ -216,22 +240,22 @@ class _EditCctvState extends State<EditCctv> {
             TextButton(
               child: Text('Confirm'),
               onPressed: () async {
-                /*   if (this.deviceStatus == 1) {
+                if (this.deviceStatus == 1) {
                   this.deviceStatus = 0;
-                  this.updatesubmit = await updateSensor(
+                  this.updatesubmit = await updateCctv(
                     this.deviceId.toString(),
                     this.deviceStatus.toString(),
                     this.user.userinfo.id.toString(),
                   );
                 } else if (this.deviceStatus == 0) {
                   this.deviceStatus = 1;
-                  this.updatesubmit = await updateSensor(
+                  this.updatesubmit = await updateCctv(
                     this.deviceId.toString(),
                     this.deviceStatus.toString(),
                     this.user.userinfo.id.toString(),
                   );
                 }
-                Navigator.of(context).pop();*/
+                Navigator.of(context).pop();
               },
             ),
             TextButton(

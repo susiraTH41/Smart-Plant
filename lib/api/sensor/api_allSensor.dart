@@ -4,7 +4,7 @@ import 'package:login_fontend/model/sensor/allSensor_model.dart';
 
   Future<AllSensorModel> allSensor(String userid ) async{
     try{
-        final String apiUrl = "http://158.108.97.160:3000/api/mobile/admin/sensor/all?" ;
+        final String apiUrl = "http://158.108.97.57:3000/api/mobile/admin/sensor/all?" ;
         final response = await http.post(apiUrl, body: {
         "myUserId":  userid ,
       }).timeout(const Duration(seconds: 5));

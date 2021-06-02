@@ -4,7 +4,7 @@ import 'package:login_fontend/model/devices/allDevices_model.dart';
 
   Future<AllDevicesModel> allDevices(String userid ) async{
     try{
-        final String apiUrl = "http://158.108.97.160:3000/api/mobile/admin/device/all?" ;
+        final String apiUrl = "http://158.108.97.57:3000/api/mobile/admin/device/all?" ;
         final response = await http.post(apiUrl, body: {
         "myUserId":  userid ,
       }).timeout(const Duration(seconds: 5));

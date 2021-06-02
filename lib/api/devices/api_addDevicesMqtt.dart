@@ -5,7 +5,7 @@ Future<AddDevicesMqttModel> addDevicesMqtt(
     String myUserId, String device_eui, String device_name) async {
   try {
     final String apiUrl =
-        "http://158.108.97.160:3000/api/mobile/admin/device/add/mqtt?";
+        "http://158.108.97.57:3000/api/mobile/admin/device/add/mqtt?";
     final response = await http.post(apiUrl, body: {
       "myUserId": myUserId,
       "device_eui": device_eui,

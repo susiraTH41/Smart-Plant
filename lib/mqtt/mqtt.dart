@@ -15,7 +15,7 @@ Future<MqttClient> connect() async {
 
   final connMess = MqttConnectMessage()
       .withClientIdentifier("flutter_client")
-      .authenticateAs("test", "test")
+      .authenticateAs("", "")
       .keepAliveFor(60)
       .withWillTopic('willtopic')
       .withWillMessage('My Will message')

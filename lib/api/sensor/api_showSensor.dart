@@ -4,7 +4,7 @@ import 'package:login_fontend/model/sensor/showSensor_model.dart';
 Future<ShowSensorModel> showSensor(String device_id, String myUserId) async {
   try {
     final String apiUrl =
-        "http://158.108.97.160:3000/api/mobile/admin/sensor/info?";
+        "http://158.108.97.57:3000/api/mobile/admin/sensor/info?";
     final response = await http.post(apiUrl, body: {
       "device_id": device_id,
       "myUserId": myUserId

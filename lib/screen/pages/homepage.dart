@@ -8,7 +8,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   InAppWebViewController controller;
-  String url = "http://158.108.97.160:3000/home";
+  String url = "http://158.108.97.57:3000/home";
   double progress = 0;
   @override
   Widget build(BuildContext context) {

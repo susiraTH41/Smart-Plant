@@ -5,7 +5,7 @@ Future<AddSensorModel> editCctv(String id, String name, String server,
     String user, String password, String myUserId) async {
   try {
     final String apiUrl =
-        "http://158.108.97.160:3000/api/mobile/admin/cctv/edit?";
+        "http://158.108.97.57:3000/api/mobile/admin/cctv/edit?";
     final response = await http.post(apiUrl, body: {
       "id": id,
       "name": name,

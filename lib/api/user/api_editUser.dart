@@ -5,7 +5,7 @@ Future<EditUserModel> editUser(String myUserId, String userId, String email,
     String first_name, String last_name, String rank) async {
   try {
     final String apiUrl =
-        "http://158.108.97.160:3000/api/mobile/admin/edituser?";
+        "http://158.108.97.57:3000/api/mobile/admin/edituser?";
     final response = await http.post(apiUrl, body: {
       "myUserId": myUserId,
       "userId": userId,

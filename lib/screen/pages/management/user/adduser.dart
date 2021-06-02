@@ -32,7 +32,7 @@ class _AddUserState extends State<AddUser> {
           child: Center(
               child: ListView(children: [
             buildTextField("E-mail", email),
-            buildTextField("Password", password),
+            buildTextPass("Password", password),
             buildTextField("Firstname", first_name),
             buildTextField("Lastname", last_name),
             builddropdowns(),
@@ -45,6 +45,26 @@ class _AddUserState extends State<AddUser> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 35.0),
       child: TextField(
+        controller: placeholder,
+        decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(bottom: 3),
+            labelText: labelText,
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            hintStyle: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            )),
+      ),
+    );
+  }
+
+
+    Widget buildTextPass(String labelText, var placeholder) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 35.0),
+      child: TextField(
+        obscureText: true,
         controller: placeholder,
         decoration: InputDecoration(
             contentPadding: EdgeInsets.only(bottom: 3),

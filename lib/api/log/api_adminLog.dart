@@ -4,7 +4,7 @@ import 'package:login_fontend/model/log/adminLog_model.dart';
 
   Future<AdminLog> adminLog(String userid ) async{
     try{
-        final String apiUrl = "http://158.108.97.160:3000/api/mobile/admin/logs?" ;
+        final String apiUrl = "http://158.108.97.57:3000/api/mobile/admin/logs?" ;
         final response = await http.post(apiUrl, body: {
         "myUserId":  userid ,
       }).timeout(const Duration(seconds: 5));
